@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/turnos",
+      "handler": "turno.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/turnos/count",
+      "handler": "turno.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/turnos/:id",
+      "handler": "turno.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/turnos",
+      "handler": "turno.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/turnos/:id",
+      "handler": "turno.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/turnos/:id",
+      "handler": "turno.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

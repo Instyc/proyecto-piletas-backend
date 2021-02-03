@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "turnos",
+  "info": {
+    "name": "Turno",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fecha": {
+      "type": "string"
+    },
+    "area": {
+      "type": "integer"
+    },
+    "asistencia": {
+      "type": "boolean"
+    },
+    "persona": {
+      "via": "turnos",
+      "model": "persona"
+    }
+  }
+}

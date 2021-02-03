@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "personas",
+  "info": {
+    "name": "Persona",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "apellido": {
+      "type": "string"
+    },
+    "nombre": {
+      "type": "string"
+    },
+    "telefono": {
+      "type": "string"
+    },
+    "domicilio": {
+      "type": "boolean"
+    },
+    "permitido": {
+      "type": "boolean"
+    },
+    "turnos": {
+      "collection": "turno",
+      "via": "persona"
+    },
+    "dni": {
+      "type": "string"
+    }
+  }
+}
