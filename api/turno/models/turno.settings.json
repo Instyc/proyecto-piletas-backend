@@ -21,8 +21,11 @@
       "type": "boolean"
     },
     "persona": {
-      "via": "turnos",
-      "model": "persona"
+      "model": "persona",
+      "via": "turnos"
+    },
+    "declarado": {
+      "type": "boolean"
     }
   }
 }

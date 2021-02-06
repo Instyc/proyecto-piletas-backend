@@ -23,14 +23,23 @@
     "domicilio": {
       "type": "boolean"
     },
-    "permitido": {
-      "type": "boolean"
-    },
     "turnos": {
-      "collection": "turno",
-      "via": "persona"
+      "via": "persona",
+      "collection": "turno"
     },
     "dni": {
+      "type": "string"
+    },
+    "nombre_alojado": {
+      "type": "string"
+    },
+    "apellido_alojado": {
+      "type": "string"
+    },
+    "dni_alojado": {
+      "type": "string"
+    },
+    "domicilio_alojado": {
       "type": "string"
     }
   }
