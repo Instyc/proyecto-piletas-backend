@@ -41,6 +41,10 @@
     },
     "domicilio_alojado": {
       "type": "string"
+    },
+    "deportes": {
+      "via": "personas",
+      "collection": "deporte"
     }
   }
 }

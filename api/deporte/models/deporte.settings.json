@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "deportes",
+  "info": {
+    "name": "Deporte"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "tipo": {
+      "type": "integer"
+    },
+    "fecha": {
+      "type": "string"
+    },
+    "horario": {
+      "type": "integer"
+    },
+    "nombre_equipo": {
+      "type": "string"
+    },
+    "personas": {
+      "collection": "persona",
+      "via": "deportes",
+      "dominant": true
+    }
+  }
+}
