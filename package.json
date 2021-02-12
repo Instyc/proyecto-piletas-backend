@@ -20,7 +20,7 @@
     "strapi-plugin-email": "3.4.5",
     "strapi-plugin-upload": "3.4.5",
     "strapi-connector-bookshelf": "3.4.5",
-    "knex": "^0.20.0",
+    "knex": "^0.21.1",
     "objection": "^2.1.3",
     "mysql": "latest"
   },
@@ -31,7 +31,7 @@
     "uuid": "d88e4ed5-c23b-434b-9d9e-2ee582a3c952"
   },
   "engines": {
-    "node": ">=10.16.0 <=14.x.x",
+    "node": ">=10.16.0 <=12.16.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
