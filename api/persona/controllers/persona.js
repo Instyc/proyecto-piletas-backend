@@ -98,8 +98,8 @@ module.exports = {
             if(disponibles>0){
                 const personaCreada = await strapi.query('persona').create(data.persona);
 
-                let resp = asignarGrupo(data.personas)
-
+                let resp = await asignarGrupo(data.personas)
+                
                 const respuestaTurno = await strapi.query('deporte').create({...data.deporte, personas: [personaCreada.id, ...resp]});
                 return {mensaje:"El turno se ha creado con éxito.",data: sanitizeEntity(respuestaTurno, { model: strapi.models.deporte }), tipo:"success"}
             }else{
@@ -171,7 +171,6 @@ module.exports = {
         return sanitizeEntity(personaEncontrada, { model: strapi.models.persona })
     },
 };
-
 
 async function asignarGrupo(personas){
     let resp = await Promise.all(personas.map(async (p)=>{
