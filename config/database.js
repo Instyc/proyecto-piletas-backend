@@ -6,11 +6,11 @@ module.exports = ({ env }) => ({
       settings: {
         client: 'mysql',
         host: env('DATABASE_HOST', '127.0.0.1'),
-        port: env.int('DATABASE_PORT', 3060),
-        database: env('DATABASE_NAME', 'backend-piletas'),
+        port: env.int('DATABASE_PORT', 3306),
+        database: env('DATABASE_NAME', 'turnos_piletas'),
         username: env('DATABASE_USERNAME', 'root'),
         password: env('DATABASE_PASSWORD', 'root'),
-        ssl: env.bool('DATABASE_SSL', false),
+        ssl: env.bool('DATABASE_SSL', true),
       },
       options: {}
     },
