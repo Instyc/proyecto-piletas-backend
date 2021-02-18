@@ -6,8 +6,8 @@ module.exports = {
         let data = ctx.request.body;
         let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
 
-        if(new Date(data.turno.fecha+" 01:00:00")<Date.now()){
-            return {mensaje: "No puede reservar un turno para un día anterior a hoy."}
+        if(new Date(data.turno.fecha+" 23:59:59")<Date.now()){
+            return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo:"error"}
         }
         
         if(!personaEncontrada){
@@ -34,8 +34,8 @@ module.exports = {
         console.log(data)
         let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
         
-        if(new Date(data.turno.fecha+" 01:00:00")<Date.now()){
-            return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo:"warning"}
+        if(new Date(data.turno.fecha+" 23:59:59")<Date.now()){
+            return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo:"error"}
         }
 
         if(personaEncontrada){
@@ -64,7 +64,7 @@ module.exports = {
                                 mes = "0"+mes
                             if (dia <10)
                                 dia = "0"+dia
-                            let mensaje = "Usted tiene un turno activo para la fecha "+dia+"-"+mes+"-"+anio+". Si desea cancelarlo, comuníquese al correo complejodeportivosb@gmail.com.ar adjuntado sus datos y una foto del frente y dorso de su documento.";  
+                            let mensaje = "Usted tiene un turno activo para la fecha "+dia+"-"+mes+"-"+anio+". Si desea cancelarlo, comuníquese al correo complejodeportivosb@gmail.com.ar.";  
                             return {mensaje: mensaje, tipo:"info"}
                         }
                     }
@@ -76,7 +76,7 @@ module.exports = {
                 return {mensaje:"No hay lugares disponibles disponibles", tipo:"error",disponibles}
             }
         }else{
-            return {mensaje:"El DNI ingresado no se encuentra registrado.", tipo:"error"}
+            return {mensaje:"El DNI ingresado no se encuentra registrado, por favor ingrese sus datos.", tipo:"error"} 
         }
     },
 
@@ -85,7 +85,7 @@ module.exports = {
         let data = ctx.request.body;
         let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
         
-        if(new Date(data.deporte.fecha+" 01:00:00")<Date.now()){
+        if(new Date(data.deporte.fecha+" 23:59:59")<Date.now()){
             return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo:"warning"}
         }
 
@@ -99,7 +99,7 @@ module.exports = {
                 const personaCreada = await strapi.query('persona').create(data.persona);
 
                 let resp = await asignarGrupo(data.personas)
-                
+
                 const respuestaTurno = await strapi.query('deporte').create({...data.deporte, personas: [personaCreada.id, ...resp]});
                 return {mensaje:"El turno se ha creado con éxito.",data: sanitizeEntity(respuestaTurno, { model: strapi.models.deporte }), tipo:"success"}
             }else{
@@ -114,7 +114,7 @@ module.exports = {
         let data = ctx.request.body;
         let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
 
-        if(new Date(data.deporte.fecha+" 01:00:00")<Date.now()){
+        if(new Date(data.deporte.fecha+" 23:59:59")<Date.now()){
             return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo:"warning"}
         }
 
@@ -145,7 +145,7 @@ module.exports = {
                                 mes = "0"+mes
                             if (dia <10)
                                 dia = "0"+dia
-                            let mensaje = "Usted tiene un turno activo para la fecha "+dia+"-"+mes+"-"+anio+". Si desea cancelarlo, comuníquese al correo complejodeportivosb@gmail.com.ar adjuntado sus datos y una foto del frente y dorso de su documento.";  
+                            let mensaje = "Usted tiene un turno activo para la fecha "+dia+"-"+mes+"-"+anio+". Si desea cancelarlo, comuníquese al correo complejodeportivosb@gmail.com.ar.";  
                             return {mensaje: mensaje, tipo:"info"}
                         }
                     }
@@ -159,7 +159,7 @@ module.exports = {
                 return {mensaje:"No hay lugares disponibles disponibles", tipo:"error",disponibles}
             }
         }else{
-            return {mensaje:"El DNI ingresado no se encuentra registrado.", tipo:"error"}
+            return {mensaje:"El DNI ingresado no se encuentra registrado, por favor ingrese sus datos.", tipo:"error"}
         }
     },
     async obtener_persona(ctx) {
