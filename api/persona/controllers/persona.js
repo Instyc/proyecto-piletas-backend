@@ -91,7 +91,7 @@ module.exports = {
 
         if(!personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
-            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha });
+            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha , tipo: data.deporte.tipo, horario: data.deporte.horario });
             let disponibles = 2-cantidad;
 
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
@@ -120,7 +120,7 @@ module.exports = {
 
         if(personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
-            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha });
+            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha , tipo: data.deporte.tipo, horario: data.deporte.horario });
             let disponibles = 2-cantidad;
             
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
