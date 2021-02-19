@@ -33,6 +33,46 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/obtener-persona",
+      "handler": "persona.obtener_persona",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/turno-pileta-nueva",
+      "handler": "persona.pileta_crear",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/turno-pileta-creada",
+      "handler": "persona.pileta_creada",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/turno-deporte-nueva",
+      "handler": "persona.deporte_crear",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/turno-deporte-creada",
+      "handler": "persona.deporte_creada",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/personas/:id",
       "handler": "persona.update",
@@ -49,4 +89,4 @@
       }
     }
   ]
-}        
+}

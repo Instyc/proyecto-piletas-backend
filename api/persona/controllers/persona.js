@@ -1,7 +1,7 @@
 'use strict';
-//const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
-module.exports = {}
-/*module.exports = {
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
+//module.exports = {}
+module.exports = {
     async pileta_crear(ctx) { 
         //Información que es pasada como JSON
         let data = ctx.request.body;
@@ -184,4 +184,4 @@ async function asignarGrupo(personas){
         }
     }))
     return resp
-}*/
+}
