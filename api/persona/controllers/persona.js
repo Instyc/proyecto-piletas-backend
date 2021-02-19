@@ -14,7 +14,7 @@ module.exports = {
         if(!personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
             let cantidad = await strapi.query('turno').count({ fecha: data.turno.fecha });
-            let disponibles = 100-cantidad;
+            let disponibles = 150-cantidad;
 
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
             if(disponibles>0){
@@ -42,7 +42,7 @@ module.exports = {
         if(personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
             let cantidad = await strapi.query('turno').count({ fecha: data.turno.fecha });
-            let disponibles = 100-cantidad;
+            let disponibles = 150-cantidad;
             
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
             if(disponibles>0){
