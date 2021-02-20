@@ -26,6 +26,9 @@
     },
     "declarado": {
       "type": "boolean"
+    },
+    "tipo": {
+      "type": "integer"
     }
   }
 }
