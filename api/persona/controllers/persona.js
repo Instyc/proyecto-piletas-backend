@@ -34,7 +34,7 @@ module.exports = {
                 const respuestaTurno = await strapi.query('turno').create({...data.turno, persona: respuestaPersona.id, tipo: turno_tipo});
                 return {mensaje:"El turno se ha creado con éxito.",data: sanitizeEntity(respuestaTurno, { model: strapi.models.turno }), tipo: "success", clave: 1};
             }else{
-                return {mensaje:"No hay lugares disponibles para la fecha ingresada.", tipo:"error" , disponibles, clave: 2}
+                return {mensaje:"No hay lugares disponibles para la fecha ingresada y la localidad declarada.", tipo:"error" , disponibles, clave: 2}
             }
         }else{
             return {mensaje:'El DNI ingresado ya está cargado en el sistema. Por favor, seleccione la opción "Ya he realizado una reserva alguna vez".', tipo:"error", clave: 3}
@@ -87,7 +87,7 @@ module.exports = {
                 const respuestaTurno = await strapi.query('turno').create({...data.turno, persona: personaEncontrada.id, tipo: turno_tipo});
                 return {mensaje:"El turno se ha creado con éxito.", data: sanitizeEntity(respuestaTurno, { model: strapi.models.turno }), tipo:"success", clave: 1};
             }else{
-                return {mensaje:"No hay lugares disponibles para la fecha ingresada.", tipo:"error", disponibles, clave: 2}
+                return {mensaje:"No hay lugares disponibles para la fecha ingresada y la localidad declarada.", tipo:"error", disponibles, clave: 2}
             }
         }else{
             return {mensaje:"El DNI ingresado no se encuentra registrado. Por favor, ingrese todos sus datos.", tipo:"error", clave: 6} 
