@@ -16,7 +16,7 @@ module.exports = {
     async pileta_crear(ctx) { 
         //Información que es pasada como JSON
         let data = ctx.request.body;
-        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
+        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni, published_at_null:false });
 
         if(new Date(data.turno.fecha+" 23:59:59")<Date.now()){
             return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo: "error", clave: 0}
@@ -25,7 +25,7 @@ module.exports = {
         if(!personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
             let turno_tipo = data.persona.domicilio===null?1:0
-            let cantidad = await strapi.query('turno').count({ fecha: data.turno.fecha, tipo: turno_tipo });
+            let cantidad = await strapi.query('turno').count({ fecha: data.turno.fecha, tipo: turno_tipo, published_at_null:false });
             let disponibles = turno_tipo===0?150-cantidad:50-cantidad;
 
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
@@ -45,7 +45,7 @@ module.exports = {
         //Información que es pasada como JSON
         let data = ctx.request.body;
         console.log(data)
-        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
+        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni, published_at_null:false });
         let turno_tipo = personaEncontrada.domicilio===null?1:0
 
         if(new Date(data.turno.fecha+" 23:59:59")<Date.now()){
@@ -54,7 +54,7 @@ module.exports = {
 
         if(personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
-            let cantidad = await strapi.query('turno').count({ fecha: data.turno.fecha, tipo: turno_tipo });
+            let cantidad = await strapi.query('turno').count({ fecha: data.turno.fecha, tipo: turno_tipo, published_at_null:false });
             let disponibles = turno_tipo===0?150-cantidad:50-cantidad;
             
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
@@ -97,7 +97,7 @@ module.exports = {
     async deporte_crear(ctx) {
         //Información que es pasada como JSON
         let data = ctx.request.body;
-        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
+        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni, published_at_null:false });
         
         if(new Date(data.deporte.fecha+" 23:59:59")<Date.now()){
             return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo:"warning", clave: 0}
@@ -105,7 +105,7 @@ module.exports = {
 
         if(!personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
-            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha , tipo: data.deporte.tipo, horario: data.deporte.horario });
+            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha , tipo: data.deporte.tipo, horario: data.deporte.horario, published_at_null:false });
             let disponibles = 2-cantidad;
 
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
@@ -126,7 +126,7 @@ module.exports = {
     async deporte_creada(ctx) {
         //Información que es pasada como JSON
         let data = ctx.request.body;
-        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni });
+        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.persona.dni, published_at_null:false });
 
         if(new Date(data.deporte.fecha+" 23:59:59")<Date.now()){
             return {mensaje: "No puede reservar un turno para un día anterior a hoy.", tipo:"warning", clave: 0}
@@ -134,7 +134,7 @@ module.exports = {
 
         if(personaEncontrada){
             //Vemos si hay turnos disponibles para la fecha
-            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha , tipo: data.deporte.tipo, horario: data.deporte.horario });
+            let cantidad = await strapi.query('deporte').count({ fecha: data.deporte.fecha , tipo: data.deporte.tipo, horario: data.deporte.horario, published_at_null:false });
             let disponibles = 2-cantidad;
             
             //Si disponible < 1, no hay turnos disponibles para la fecha elegida
@@ -180,7 +180,7 @@ module.exports = {
         //Información que es pasada como JSON
         let data = ctx.request.body;
         console.log(data)
-        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.dni });
+        let personaEncontrada = await strapi.query('persona').findOne({  dni: data.dni, published_at_null:false });
         
         return sanitizeEntity(personaEncontrada, { model: strapi.models.persona })
     },
@@ -188,7 +188,7 @@ module.exports = {
 
 async function asignarGrupo(personas){
     let resp = await Promise.all(personas.map(async (p)=>{
-        let existeP = await strapi.query('persona').findOne({ dni: p.dni });
+        let existeP = await strapi.query('persona').findOne({ dni: p.dni, published_at_null:false });
         if(existeP){
             return existeP.id
         }else{
