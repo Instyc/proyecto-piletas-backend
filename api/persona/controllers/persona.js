@@ -10,6 +10,7 @@ const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
     Clave 4: (warning) Tiene que esperar todavía para realizar otro turno.
     Clave 5: (info) Tiene un turno activo.
     Clave 6: (error) El DNI no se encuentra en el sistema.
+    Clave 7: (warning) No canceló su turno y no fue.
 */
 
 module.exports = {
@@ -62,10 +63,10 @@ module.exports = {
                 if(personaEncontrada.turnos.length!==0){
                     let ultTurno = new Date(personaEncontrada.turnos[personaEncontrada.turnos.length-1].fecha+" 23:59:59");
                     let unDiaDespues = Date.parse(ultTurno) + 1000*60*60*24 //24 horas a milisegundos
-                    let dosDias = Date.parse(ultTurno) + 1000*60*60*36 //36 horas a milisegundos
-                    
+
                     if(unDiaDespues>Date.now()){
                         if(ultTurno<Date.now()){
+                            let dosDias = Date.parse(ultTurno) + 1000*60*60*36 //36 horas a milisegundos
                             let permitido = new Date(dosDias)
                             let mensaje = "Debido a su último turno expedido, puede volver a realizar una reserva el día "+permitido.getDate()+"/"+(permitido.getMonth()+1)+"/"+permitido.getFullYear();
                             return {mensaje: mensaje, tipo:"warning", clave: 4}
@@ -80,6 +81,16 @@ module.exports = {
                                 dia = "0"+dia
                             let mensaje = "Usted tiene un turno activo para la fecha "+dia+"-"+mes+"-"+anio+". Si desea cancelarlo, comuníquese al correo complejodeportivosb@gmail.com.ar.";  
                             return {mensaje: mensaje, tipo:"info", clave: 5}
+                        }
+                    }else{
+                        let cincoDiasDespues = Date.parse(ultTurno) + 1000*60*60*24*5 
+                        if(cincoDiasDespues>Date.now()){
+                            if(!personaEncontrada.turnos[personaEncontrada.turnos.length-1].asistido){
+                                let seisDias = Date.parse(ultTurno) + 1000*60*60*24*6
+                                let permitido = new Date(seisDias)
+                                let mensaje = "Debido a que no asistió a su último turno reservado, podrá volver a realizar una reserva el día "+permitido.getDate()+"/"+(permitido.getMonth()+1)+"/"+permitido.getFullYear();
+                                return {mensaje: mensaje, tipo:"warning", clave: 7}
+                            }
                         }
                     }
                 }
