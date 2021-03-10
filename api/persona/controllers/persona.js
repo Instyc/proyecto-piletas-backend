@@ -85,7 +85,7 @@ module.exports = {
                     }else{
                         let cincoDiasDespues = Date.parse(ultTurno) + 1000*60*60*24*5 
                         if(cincoDiasDespues>Date.now()){
-                            if(!personaEncontrada.turnos[personaEncontrada.turnos.length-1].asistido){
+                            if(!personaEncontrada.turnos[personaEncontrada.turnos.length-1].asistencia){
                                 let seisDias = Date.parse(ultTurno) + 1000*60*60*24*6
                                 let permitido = new Date(seisDias)
                                 let mensaje = "Debido a que no asistió a su último turno reservado, podrá volver a realizar una reserva el día "+permitido.getDate()+"/"+(permitido.getMonth()+1)+"/"+permitido.getFullYear();
